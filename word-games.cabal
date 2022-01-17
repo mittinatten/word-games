@@ -1,0 +1,60 @@
+name:                word-games
+version:             0.1.0.0
+synopsis:            Playing word games
+description:         Based on Hangman example in Haskell from first principles
+homepage:            https://github.com/githubuser/hangman#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Simon Mitternacht
+maintainer:          example@example.com
+copyright:           2022 Simon Mitternacht
+category:            Game
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+                   , data/dict.txt
+
+executable hangman
+  hs-source-dirs:      src
+  main-is:             MainHangman.hs
+  default-language:    Haskell2010
+  other-modules:       Hangman
+                     , WordList
+  build-depends:       base >= 4.7 && < 5
+                     , word-games
+                     , random
+
+executable wordle
+  hs-source-dirs:      src
+  main-is:             MainWordle.hs
+  default-language:    Haskell2010
+  other-modules:       Wordle
+                     , WordList
+  build-depends:       base >= 4.7 && < 5
+                     , word-games
+                     , random
+
+library
+  exposed-modules:
+      Hangman
+      WordList
+      Wordle
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , random
+  default-language: Haskell2010
+  ghc-options: -Wall -fwarn-tabs
+
+test-suite tests
+  type: exitcode-stdio-1.0
+  main-is: tests.hs
+  hs-source-dirs:
+      tests
+  ghc-options: -Wall -fno-warn-orphans
+  build-depends:
+      base >=4.7 && <5
+    , word-list
+    , QuickCheck
+  default-language: Haskell2010
